@@ -1,5 +1,6 @@
 package org.employee.search.resource;
 
+import org.employee.search.model.AuthenticationRequest;
 import org.employee.search.model.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,4 +12,7 @@ public interface AuthenticationResource {
 
     @PostMapping("/register")
     ResponseEntity<User> register(@RequestBody User user);
+
+    @PostMapping("/authenticate")
+    ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest request) throws Exception;
 }
