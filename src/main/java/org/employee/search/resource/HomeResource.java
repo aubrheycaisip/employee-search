@@ -1,23 +1,46 @@
 package org.employee.search.resource;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.employee.search.service.UserService;
+import org.employee.search.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class HomeResource {
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/")
-    public String home(){
-        return ("<h1>Welcome</h1>");
+    public List<User> home(){
+        return userService.getAllUser();
     }
 
-    @GetMapping("/admin")
+    @PostMapping("/")
+    public void createUser(@RequestBody User user){
+        userService.createUser(user);
+    }
+
+    @GetMapping("/admins")
     public String homeAdmin(){
         return ("<h1>Welcome Admin</h1>");
     }
 
-    @GetMapping("/user")
+    @GetMapping("/users")
     public String homeUser(){
         return ("<h1>Welcome User</h1>");
     }
+
+    @GetMapping("/{id}")
+    public User getById(@PathVariable Long id){
+        return userService.getById(id);
+    }
+
+    @GetMapping("/username/{username}")
+    public User getByUsername(@PathVariable String username){
+        return userService.getByUsername(username);
+    }
+
 }
