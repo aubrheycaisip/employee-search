@@ -1,6 +1,5 @@
 package org.employee.search.service.impl;
 
-import javassist.NotFoundException;
 import org.employee.search.model.Role;
 import org.employee.search.model.User;
 import org.employee.search.repository.UserRepository;
@@ -50,8 +49,8 @@ public class UserServiceImpl implements UserService {
     public User getByUsername(String username){
         User user = null;
         try {
-            user = userRepo.findByUsername(username).orElseThrow(() -> new NotFoundException("User not found."));
-        } catch (NotFoundException e) {
+            user = userRepo.findByUsername(username).orElseThrow(() -> new Exception("User not found."));
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return user;

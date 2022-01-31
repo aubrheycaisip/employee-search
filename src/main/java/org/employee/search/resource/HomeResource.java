@@ -1,8 +1,10 @@
 package org.employee.search.resource;
 
-import org.employee.search.service.UserService;
 import org.employee.search.model.User;
+import org.employee.search.service.TestingService;
+import org.employee.search.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +14,9 @@ public class HomeResource {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TestingService testingService;
 
     @GetMapping("/")
     public List<User> home(){
@@ -41,6 +46,11 @@ public class HomeResource {
     @GetMapping("/username/{username}")
     public User getByUsername(@PathVariable String username){
         return userService.getByUsername(username);
+    }
+
+    @GetMapping("/add")
+    public ResponseEntity<?> add(){
+        return ResponseEntity.ok(testingService.add(1,2));
     }
 
 }
